@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/mobile_navigation"
+    app:startDestination="@+id/chordTonalitySelectionFragment">
+    <fragment
+        android:id="@+id/chordTonalitySelectionFragment"
+        android:name="net.ali.pgc.ui.chordPrompter.ChordTonalitySelectionFragment"
+        android:label="@string/title_chords_prompter"
+        tools:layout="@layout/fragment_chord_tonality_selection">
+        <action
+            android:id="@+id/action_chordTonalitySelectionFragment_to_chordPrompterFragment"
+            app:destination="@id/chordPrompterFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/chordPrompterFragment"
+        android:name="net.ali.pgc.ui.chordPrompter.ChordPrompterFragment"
+        tools:layout="@layout/fragment_chord_prompter">
+        <!-- Add any actions or arguments if needed -->
+    </fragment>
+
+    <fragment
+        android:id="@+id/navigation_home"
+        android:name="net.ali.pgc.ui.home.HomeFragment"
+        android:label="@string/title_home"
+        tools:layout="@layout/fragment_home" />
+    <fragment
+        android:id="@+id/navigation_dashboard"
+        android:name="net.ali.pgc.ui.dashboard.DashboardFragment"
+        android:label="@string/title_dashboard"
+        tools:layout="@layout/fragment_dashboard" />
+
+    <fragment
+        android:id="@+id/navigation_notifications"
+        android:name="net.ali.pgc.ui.notifications.NotificationsFragment"
+        android:label="@string/title_notifications"
+        tools:layout="@layout/fragment_notifications" />
+
+</navigation>

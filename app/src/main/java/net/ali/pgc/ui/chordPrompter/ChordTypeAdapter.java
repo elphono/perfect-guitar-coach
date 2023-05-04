@@ -9,6 +9,7 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 
@@ -16,7 +17,7 @@ public class ChordTypeAdapter extends RecyclerView.Adapter<ChordTypeAdapter.Chor
 
     private List<String> chordTypes;
     private OnChordTypeClickListener onChordTypeClickListener;
-    private HashSet<Integer> selectedPositions = new HashSet<>();
+    private List<Integer> selectedPositions = new ArrayList<>();
 
     public ChordTypeAdapter(List<String> chordTypes, OnChordTypeClickListener onChordTypeClickListener) {
         this.chordTypes = chordTypes;
@@ -43,7 +44,7 @@ public class ChordTypeAdapter extends RecyclerView.Adapter<ChordTypeAdapter.Chor
     }
 
     public static class ChordTypeViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
-        private HashSet<Integer> selectedPositions;
+        private List<Integer> selectedPositions;
         private TextView chordTypeTextView;
         private OnChordTypeClickListener onChordTypeClickListener;
 
@@ -71,7 +72,7 @@ public class ChordTypeAdapter extends RecyclerView.Adapter<ChordTypeAdapter.Chor
         }
     }
 
-    public HashSet<Integer> getSelectedPositions() {
+    public List<Integer> getSelectedPositions() {
         return selectedPositions;
     }
 

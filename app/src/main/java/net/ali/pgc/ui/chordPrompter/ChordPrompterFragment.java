@@ -13,9 +13,6 @@ import androidx.fragment.app.Fragment;
 
 import net.ali.pgc.R;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.HashSet;
 import java.util.List;
 import java.util.Random;
 
@@ -34,23 +31,8 @@ public class ChordPrompterFragment extends Fragment {
         // Get the selected chord types and tonalities from the ChordTonalitySelectionFragment
         Bundle args = getArguments();
         if (args != null) {
-            HashSet<Integer> selectedChordTypes = (HashSet<Integer>) args.getSerializable("selectedChordTypes");
-            HashSet<Integer> selectedTonalities = (HashSet<Integer>) args.getSerializable("selectedTonalities");
-
-            // Assuming you have a complete list of chord types and tonalities in ChordTonalitySelectionFragment
-            List<String> allChordTypes = Arrays.asList("Major", "Minor", "7", "maj7", "m7", "dim", "aug");
-            List<String> allTonalities = Arrays.asList("A", "B", "C", "D", "E", "F", "G");
-
-            chordTypes = new ArrayList<>();
-            tonalities = new ArrayList<>();
-
-            for (Integer index : selectedChordTypes) {
-                chordTypes.add(allChordTypes.get(index));
-            }
-
-            for (Integer index : selectedTonalities) {
-                tonalities.add(allTonalities.get(index));
-            }
+            chordTypes = (List<String>) args.getSerializable("selectedChordTypes");
+            tonalities = (List<String>) args.getSerializable("selectedTonalities");
         }
 
         chordDisplay = view.findViewById(R.id.chord_display);

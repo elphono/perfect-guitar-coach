@@ -17,12 +17,15 @@ import android.widget.Button;
 
 import net.ali.pgc.R;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashSet;
 import java.util.List;
 
 public class ChordTonalitySelectionFragment extends Fragment {
-
+    // Set up the data for chord types and tonalities
+    List<String> chordTypes = Arrays.asList("Major", "Minor", "7", "maj7", "m7", "dim", "aug");
+    List<String> tonalities = Arrays.asList("A", "B", "C", "D", "E", "F", "G");
     private RecyclerView chordTypesRecyclerView;
     private RecyclerView tonalitiesRecyclerView;
     private Button startWorkoutButton;
@@ -47,9 +50,16 @@ public class ChordTonalitySelectionFragment extends Fragment {
             // Set up start workout button click listener
             if (startWorkoutButton != null) {
                 startWorkoutButton.setOnClickListener(v -> {
-                    HashSet<Integer> selectedChordTypes = chordTypeAdapter.getSelectedPositions();
-                    HashSet<Integer> selectedTonalities = tonalityAdapter.getSelectedPositions();
 
+                    ArrayList<String> selectedChordTypes = new ArrayList<>();
+                    ArrayList<String> selectedTonalities = new ArrayList<>();
+                    for (Integer index : chordTypeAdapter.getSelectedPositions()) {
+                        selectedChordTypes.add(chordTypes.get(index));
+                    }
+
+                    for (Integer index : tonalityAdapter.getSelectedPositions()) {
+                        selectedTonalities.add(tonalities.get(index));
+                    }
                     Bundle bundle = new Bundle();
                     bundle.putSerializable("selectedChordTypes", selectedChordTypes);
                     bundle.putSerializable("selectedTonalities", selectedTonalities);
@@ -63,9 +73,6 @@ public class ChordTonalitySelectionFragment extends Fragment {
     }
 
     private void setupRecyclerViews() {
-        // Set up the data for chord types and tonalities
-        List<String> chordTypes = Arrays.asList("Major", "Minor", "7", "maj7", "m7", "dim", "aug");
-        List<String> tonalities = Arrays.asList("A", "B", "C", "D", "E", "F", "G");
         // Initialize adapters
         chordTypeAdapter = new ChordTypeAdapter(chordTypes, position -> {
             // TODO: Handle chord type click events
@@ -75,10 +82,8 @@ public class ChordTonalitySelectionFragment extends Fragment {
         });
 
         // Set adapters for RecyclerViews
-        if (chordTypesRecyclerView != null && tonalitiesRecyclerView != null) {
-            chordTypesRecyclerView.setAdapter(chordTypeAdapter);
-            tonalitiesRecyclerView.setAdapter(tonalityAdapter);
-        }
+        chordTypesRecyclerView.setAdapter(chordTypeAdapter);
+        tonalitiesRecyclerView.setAdapter(tonalityAdapter);
     }
 
 }

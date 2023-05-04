@@ -5,6 +5,8 @@ import android.os.Handler;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.CompoundButton;
+import android.widget.Switch;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -18,10 +20,12 @@ import java.util.Random;
 
 public class ChordPrompterFragment extends Fragment {
     private TextView chordDisplay;
+    private Switch pausePlaySwitch;
     private List<String> chordTypes;
     private List<String> tonalities;
     private Handler handler;
     private Runnable updateChordRunnable;
+    private boolean isPaused;
 
     @Nullable
     @Override
@@ -36,18 +40,24 @@ public class ChordPrompterFragment extends Fragment {
         }
 
         chordDisplay = view.findViewById(R.id.chord_display);
+        pausePlaySwitch = view.findViewById(R.id.pause_play_switch);
+        isPaused = false;
 
         // Set up the handler and runnable for updating the chord display
         handler = new Handler();
         updateChordRunnable = new Runnable() {
             @Override
             public void run() {
-                String randomChord = getRandomChord();
-                chordDisplay.setText(randomChord);
+                if (!isPaused) {
+                    String randomChord = getRandomChord();
+                    chordDisplay.setText(randomChord);
+                }
                 handler.postDelayed(this, 4000);
             }
         };
         handler.post(updateChordRunnable);
+
+        pausePlaySwitch.setOnCheckedChangeListener((buttonView, isChecked) -> isPaused = isChecked);
 
         return view;
     }

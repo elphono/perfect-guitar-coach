@@ -7,11 +7,13 @@
     tools:context="net.ali.pgc.ui.chordPrompter.ChordPrompterFragment">
 
     <TextView
-        android:id="@+id/selected_chords_textview"
-        android:layout_width="0dp"
+        android:id="@+id/chord_display"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_margin="16dp"
-        android:text="Selected Chords"
+        android:text="Chord"
+        android:textSize="48sp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />

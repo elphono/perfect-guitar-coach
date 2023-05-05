@@ -11,7 +11,11 @@ import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.appcompat.app.ActionBar;
+import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
+
+import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 import net.ali.pgc.R;
 
@@ -59,6 +63,13 @@ public class ChordPrompterFragment extends Fragment {
 
         pausePlaySwitch.setOnCheckedChangeListener((buttonView, isChecked) -> isPaused = isChecked);
 
+        // Hide the BottomNavigationView
+        if (getActivity() != null) {
+            BottomNavigationView bottomNavigationView = getActivity().findViewById(R.id.nav_view);
+            if (bottomNavigationView != null) {
+                bottomNavigationView.setVisibility(View.GONE);
+            }
+        }
         return view;
     }
 
@@ -66,6 +77,14 @@ public class ChordPrompterFragment extends Fragment {
     public void onDestroyView() {
         super.onDestroyView();
         handler.removeCallbacks(updateChordRunnable);
+
+        // Show the BottomNavigationView
+        if (getActivity() != null) {
+            BottomNavigationView bottomNavigationView = getActivity().findViewById(R.id.nav_view);
+            if (bottomNavigationView != null) {
+                bottomNavigationView.setVisibility(View.VISIBLE);
+            }
+        }
     }
 
     private String getRandomChord() {
